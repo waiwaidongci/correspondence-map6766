@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>匿名列联表 · 隐私分组发布</title>
+<link rel="stylesheet" href="/web/styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">▦</span>
+    <div>
+      <h1>匿名列联表 · 隐私分组发布</h1>
+      <p>按行列类别分组发布计数 · 小格保护 · 联立历史的逐格可行整数范围</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="btn-new-study" class="btn btn-primary">＋ 新建研究</button>
+    <button id="btn-seed" class="btn">载入演示数据</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左：研究列表 -->
+  <aside class="panel panel-studies">
+    <h2>研究（底表）</h2>
+    <div id="study-list" class="study-list"></div>
+  </aside>
+
+  <!-- 中：底表与分组配置 -->
+  <section class="panel panel-main">
+    <div id="study-head"></div>
+
+    <div class="card" id="card-base" hidden>
+      <h3>底表计数（正计数低于阈值的格自动保护）</h3>
+      <div id="base-table"></div>
+    </div>
+
+    <div class="card" id="card-group" hidden>
+      <h3>分组发布配置</h3>
+      <div class="form-row">
+        <label>发布标题 <input id="pub-title" type="text" placeholder="如：2026 秋季对外发布" /></label>
+      </div>
+      <div class="group-config">
+        <div>
+          <h4>行类别分组</h4>
+          <div id="row-groups" class="groups"></div>
+        </div>
+        <div>
+          <h4>列类别分组</h4>
+          <div id="col-groups" class="groups"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <h4>补隐分组块（可额外隐去其他格；含保护格的块已强制隐去）</h4>
+        <div id="supp-blocks" class="supp-blocks"></div>
+      </div>
+      <div class="actions">
+        <button id="btn-preview" class="btn btn-primary">预览（不占历史）</button>
+        <button id="btn-publish" class="btn btn-danger">正式发布</button>
+      </div>
+    </div>
+
+    <div id="preview-area"></div>
+  </section>
+
+  <!-- 右：发布历史 -->
+  <aside class="panel panel-history">
+    <h2>发布历史</h2>
+    <div id="history-list" class="history-list"></div>
+  </aside>
+</main>
+
+<!-- 新建/校订研究弹窗 -->
+<div id="modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <h3 id="modal-title">新建研究</h3>
+    <div class="form-row">
+      <label>研究名称 <input id="m-name" type="text" /></label>
+    </div>
+    <div class="form-row">
+      <label>说明 <input id="m-desc" type="text" /></label>
+    </div>
+    <div class="form-row">
+      <label>保护阈值（正计数 &lt; 阈值即保护）
+        <input id="m-threshold" type="number" value="5" min="1" /></label>
+    </div>
+    <div class="form-row">
+      <label>行标签（逗号分隔）<input id="m-rows" type="text" /></label>
+    </div>
+    <div class="form-row">
+      <label>列标签（逗号分隔）<input id="m-cols" type="text" /></label>
+    </div>
+    <div class="form-row">
+      <label>计数矩阵（每行逗号分隔，行之间换行）
+        <textarea id="m-matrix" rows="6"></textarea></label>
+    </div>
+    <div id="modal-error" class="error-text" hidden></div>
+    <div class="actions">
+      <button id="modal-cancel" class="btn">取消</button>
+      <button id="modal-save" class="btn btn-primary">保存</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<script src="/web/app.js"></script>
+</body>
+</html>
